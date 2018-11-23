@@ -84,8 +84,6 @@ typedef NS_ENUM(NSInteger, MQTTSessionError) {
 
 @protocol MQTTSessionDelegate <NSObject>
 
-@required
-- (UIApplication*)sharedApplication;
 @optional
 
 /** gets called when a new message was received
@@ -490,6 +488,7 @@ typedef void (^MQTTPublishHandler)(NSError *error);
  */
 @property (nonatomic) BOOL voip;
 
+@property (weak, nonatomic) UIApplication *sharedApplication;
 /** connect to the given host through the given transport with the given
  *  MQTT session parameters asynchronously
  *
@@ -886,4 +885,6 @@ typedef void (^MQTTPublishHandler)(NSError *error);
                userProperty:(NSDictionary <NSString *, NSString *> *)userProperty
           disconnectHandler:(MQTTDisconnectHandler)disconnectHandler;
 
+
+- (instancetype)initWithSharedApplication:(UIApplication *)sharedApplication;
 @end

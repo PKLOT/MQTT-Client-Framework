@@ -103,13 +103,9 @@
                                                          }];
 #if TARGET_OS_IPHONE == 1
     if (connectInForeground) {
-        if (self.session.delegate){
-            if([self.session.delegate respondsToSelector:@selector(sharedApplication)]){
-                UIApplication* shareApplication = [self.session.delegate sharedApplication];
-                if (nil != shareApplication){
-                    self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:shareApplication];
-                }
-            }
+        UIApplication* shareApplication = self.session.sharedApplication;
+        if (nil != shareApplication){
+            self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:shareApplication];
         }
     }
 #endif
@@ -336,7 +332,6 @@
         }
     }
 }
-
 
 - (void)connectToInternal:(MQTTConnectHandler)connectHandler {
     if (self.session && self.state == MQTTSessionManagerStateStarting) {
