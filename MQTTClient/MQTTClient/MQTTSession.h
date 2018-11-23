@@ -488,7 +488,7 @@ typedef void (^MQTTPublishHandler)(NSError *error);
  */
 @property (nonatomic) BOOL voip;
 
-@property (weak, nonatomic) UIApplication *sharedApplication;
+@property (weak, nonatomic) UIApplication * _Nullable sharedApplication;
 /** connect to the given host through the given transport with the given
  *  MQTT session parameters asynchronously
  *
