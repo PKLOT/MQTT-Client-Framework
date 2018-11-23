@@ -24,6 +24,7 @@
 #import "MQTTMessage.h"
 #import "MQTTPersistence.h"
 #import "MQTTTransport.h"
+#import <UIKit/UIKit.h>
 
 @class MQTTSession;
 @class MQTTSSLSecurityPolicy;
@@ -83,6 +84,8 @@ typedef NS_ENUM(NSInteger, MQTTSessionError) {
 
 @protocol MQTTSessionDelegate <NSObject>
 
+@required
+- (UIApplication*)sharedApplication;
 @optional
 
 /** gets called when a new message was received

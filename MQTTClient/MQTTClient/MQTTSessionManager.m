@@ -103,7 +103,14 @@
                                                          }];
 #if TARGET_OS_IPHONE == 1
     if (connectInForeground) {
-        self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self];
+        if (self.session.delegate){
+            if([self.session.delegate respondsToSelector:@selector(sharedApplication)]){
+                UIApplication* shareApplication = [self.session.delegate sharedApplication];
+                if (nil != shareApplication){
+                    self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:shareApplication];
+                }
+            }
+        }
     }
 #endif
     self.subscriptionLock = [[NSLock alloc] init];
