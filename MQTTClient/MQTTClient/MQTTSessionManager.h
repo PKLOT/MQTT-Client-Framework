@@ -172,7 +172,8 @@ typedef NS_ENUM(int, MQTTSessionManagerState) {
                  maxConnectionRetryInterval:(NSTimeInterval)maxRetryInterval
                         connectInForeground:(BOOL)connectInForeground
                              streamSSLLevel:(NSString *)streamSSLLevel
-                                      queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
+                                      queue:(dispatch_queue_t)queue
+                               applicaation:(UIApplication* _Nullable) application NS_DESIGNATED_INITIALIZER;
 
 /** Connects to the MQTT broker and stores the parameters for subsequent reconnects
  * @param host specifies the hostname or ip address to connect to. Defaults to @"localhost".

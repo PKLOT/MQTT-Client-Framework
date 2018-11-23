@@ -885,6 +885,4 @@ typedef void (^MQTTPublishHandler)(NSError *error);
                userProperty:(NSDictionary <NSString *, NSString *> *)userProperty
           disconnectHandler:(MQTTDisconnectHandler)disconnectHandler;
 
-
-- (instancetype)initWithSharedApplication:(UIApplication * _Nullable )sharedApplication;
 @end

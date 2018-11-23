@@ -71,7 +71,8 @@
           maxConnectionRetryInterval:RECONNECT_TIMER_MAX_DEFAULT
                  connectInForeground:YES
                       streamSSLLevel:(NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL
-                               queue:dispatch_get_main_queue()];
+                               queue:dispatch_get_main_queue()
+                        applicaation:nil];
     return self;
 }
 
@@ -82,7 +83,8 @@
                  maxConnectionRetryInterval:(NSTimeInterval)maxRetryInterval
                         connectInForeground:(BOOL)connectInForeground
                              streamSSLLevel:(NSString *)streamSSLLevel
-                                      queue:(dispatch_queue_t)queue {
+                                      queue:(dispatch_queue_t)queue
+                               applicaation:(UIApplication* _Nullable) application{
     self = [super init];
     self.streamSSLLevel = streamSSLLevel;
     self.queue = queue;
@@ -102,11 +104,8 @@
                                                              [weakSelf reconnect:nil];
                                                          }];
 #if TARGET_OS_IPHONE == 1
-    if (connectInForeground) {
-        UIApplication* shareApplication = self.session.sharedApplication;
-        if (nil != shareApplication){
-            self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:shareApplication];
-        }
+    if (connectInForeground && nil != application) {
+        self.foregroundReconnection = [[ForegroundReconnection alloc] initWithMQTTSessionManager:self application:application];
     }
 #endif
     self.subscriptionLock = [[NSLock alloc] init];

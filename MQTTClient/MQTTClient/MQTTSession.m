@@ -65,12 +65,6 @@ NSString * const MQTTSessionErrorDomain = @"MQTT";
         }
     }
 }
-- (instancetype)initWithSharedApplication:( UIApplication * _Nullable )sharedApplication {
-    self = [self init];
-    self.sharedApplication = sharedApplication;
- 
-    return self;
-}
 
 - (instancetype)init {
     DDLogVerbose(@"[MQTTSession] init");
